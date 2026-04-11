@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le concept — Mona Pizza</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--g:#357652;--g2:#357652;--gold:#D4A843;--goldf:#E8C06A;--cream:#F5F0E8;--creamf:#EDE8DC;--ink:#1A1611;--w:#FFFFFF;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:68px;background:rgba(28,58,42,0.97);border-bottom:1px solid rgba(212,168,67,0.2);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:22px;color:var(--gold);text-decoration:none;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.6);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--g);background:var(--gold);padding:9px 20px;text-decoration:none;}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.burger span{display:block;width:22px;height:1.5px;background:rgba(245,240,232,0.8);margin:5px 0;}
+
+.page-hero{background:var(--g);padding:120px 64px 72px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;}
+.page-hero-eye{font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(212,168,67,0.45);margin-bottom:16px;}
+.page-hero-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:clamp(56px,7vw,88px);color:var(--gold);line-height:1;letter-spacing:-0.02em;}
+.page-hero-right{padding-bottom:8px;}
+.page-hero-lead{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;font-weight:300;color:rgba(245,240,232,0.65);line-height:1.55;border-left:2px solid rgba(212,168,67,0.3);padding-left:24px;}
+
+.concept-body{max-width:960px;margin:0 auto;padding:80px 48px;}
+
+.concept-block{display:grid;grid-template-columns:160px 1fr;gap:0;padding:56px 0;border-bottom:0.5px solid rgba(28,58,42,0.1);}
+.concept-block:last-child{border-bottom:none;}
+.concept-n{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:rgba(28,58,42,0.08);line-height:1;}
+.concept-content{padding-left:40px;border-left:0.5px solid rgba(212,168,67,0.2);}
+.concept-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:34px;color:var(--g);margin-bottom:16px;line-height:1;}
+.concept-text{font-size:14px;line-height:1.85;color:rgba(28,58,42,0.6);max-width:540px;}
+.concept-text em{color:var(--g);font-style:normal;font-weight:500;}
+
+.values-section{background:var(--g);padding:100px 0;}
+.values-inner{max-width:960px;margin:0 auto;padding:0 48px;}
+.values-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:48px;color:var(--gold);margin-bottom:48px;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(212,168,67,0.1);}
+.value-item{background:var(--g2);padding:36px 28px;}
+.value-title{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.value-text{font-size:13px;line-height:1.75;color:rgba(245,240,232,0.5);}
+
+footer{background:var(--g);padding:64px;border-top:0.5px solid rgba(212,168,67,0.15);}
+.footer-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:64px;margin-bottom:40px;}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:32px;color:var(--gold);margin-bottom:8px;}
+.footer-tagline{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(212,168,67,0.35);line-height:2;}
+.footer-col-title{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(212,168,67,0.4);margin-bottom:16px;}
+.footer-col a,.footer-col p{font-size:13px;color:rgba(245,240,232,0.45);line-height:2.2;text-decoration:none;display:block;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{max-width:960px;margin:0 auto;padding-top:24px;border-top:0.5px solid rgba(212,168,67,0.1);display:flex;justify-content:space-between;}
+.footer-copy{font-size:10px;color:rgba(212,168,67,0.25);letter-spacing:0.1em;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links,.nav-cta{display:none;}
+  .burger{display:block;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(28,58,42,0.98);padding:24px;gap:20px;}
+  .page-hero{grid-template-columns:1fr;padding:100px 20px 48px;gap:32px;}
+  .concept-body{padding:48px 20px;}
+  .concept-block{grid-template-columns:1fr;}
+  .concept-n{font-size:48px;margin-bottom:8px;}
+  .concept-content{padding-left:0;border-left:none;padding-top:12px;}
+  .values-section{padding:64px 0;}
+  .values-inner{padding:0 20px;}
+  .values-grid{grid-template-columns:1fr;}
+  footer{padding:48px 20px;}
+  .footer-grid{grid-template-columns:1fr;gap:32px;}
+  .footer-bottom{flex-direction:column;gap:8px;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Mona Pizza</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="menu.html">La carte</a></li>
+    <li><a href="concept.html" class="active">Le concept</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Nous trouver</a>
+  <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero">
+  <div>
+    <div class="page-hero-eye">Notre histoire &amp; nos valeurs</div>
+    <h1 class="page-hero-title">Le concept</h1>
+  </div>
+  <div class="page-hero-right">
+    <p class="page-hero-lead">Des amoureux de la pizza sous toutes ses formes mais surtout de la napolitaine, des passionné.e.s de cuisine en quête de la recette parfaite pour chaque ingrédient.</p>
+  </div>
+</div>
+
+<div class="concept-body">
+  <div class="concept-block">
+    <div class="concept-n">01</div>
+    <div class="concept-content">
+      <div class="concept-title">Le levain naturel</div>
+      <p class="concept-text">Notre levain est vivant. Il est nourri chaque jour, il vit avec nous. C'est lui qui donne à la pâte sa légèreté, ses alvéoles irrégulières et cette légère acidité qui la distingue d'une pâte à levure industrielle.<br><br><em>Pas de levure boulangère. Pas de raccourcis. Juste le temps.</em></p>
+    </div>
+  </div>
+  <div class="concept-block">
+    <div class="concept-n">02</div>
+    <div class="concept-content">
+      <div class="concept-title">Des recettes originales</div>
+      <p class="concept-text">Notre carte a été concus avec le plus grand soin après avoir experimentés toute sorte d'ingrédient, notre volonté est d'apporté notre créativité tout en offrant une experience de dégustation reconfortante et familière, que chaque recette de nos pizza soit comme un nouveau tube pop qu'on découvre tout en ayant le sentiment de l'avoir toujours connu.</em></p>
+    </div>
+  </div>
+  <div class="concept-block">
+    <div class="concept-n">03</div>
+    <div class="concept-content">
+      <div class="concept-title">La pate maison et artisanale</div>
+      <p class="concept-text">Chaque pâton est unique et traité avec soin, composé d'une farine prenium made in italie et d'un levain naturel vivant fait maison, il repose minimum 48 heures avant d'être façonné, laissant les sucres se transformer, les arômes se développer, le gluten se relaxe. La pizza devient plus digeste, plus complexe, plus intéressante.<br><br><em>On prépare aujourd'hui ce que vous mangerez après-demain.</em></p>
+    </div>
+  </div>
+  <div class="concept-block">
+    <div class="concept-n">04</div>
+    <div class="concept-content">
+      <div class="concept-title">ingrédients de saison et de proximité</div>
+      <p class="concept-text">Nous nous efforcons de proposer des recettes en accord avec la saisonalité, de selectionner avec soin nos ingrédients </em></p>
+    </div>
+  </div>
+</div>
+
+<div class="values-section">
+  <div class="values-inner">
+    <h2 class="values-title">Nos engagements</h2>
+    <div class="values-grid">
+      <div class="value-item">
+        <div class="value-title">Produits frais</div>
+        <div class="value-text">Ingrédients sourcés au plus près, changés au fil des saisons. Pas de surgélation, pas de stocks dormants.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-title">Préparé devant vous</div>
+        <div class="value-text">Chaque pizza est façonnée et cuite au moment de la commande. Vous voyez exactement ce que vous mangez.</div>
+      </div>
+      <div class="value-item">
+        <div class="value-title">Transparence totale</div>
+        <div class="value-text">Les ingrédients sont sur la carte. Les allergènes sont disponibles sur demande. On s'adapte à vos besoins pour vous offrir la pizza qui vous fera plaisir.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">Mona Pizza</div><div class="footer-tagline">Pizza napolitaine artisanale<br>Au levain naturel · Paris &amp; Pantin</div></div>
+    <div class="footer-col"><div class="footer-col-title">Navigation</div><a href="index.html">Accueil</a><a href="menu.html">La carte</a><a href="concept.html">Le concept</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><div class="footer-col-title">Nous trouver</div><p>Jeu · Ven · Sam · Dim — Soir</p><p style="margin-top:10px;">mona.pizza.truck@gmail.com</p><p>06 27 84 54 50</p><p><a href="https://instagram.com/monapizza__" target="_blank">@monapizza</a></p></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 Mona Pizza</div><div class="footer-copy">Paris · Pantin · Petite Couronne</div></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La carte — Mona Pizza</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--g:#357652;--g2:#264D38;--gold:#D4A843;--goldf:#E8C06A;--cream:#F5F0E8;--creamf:#EDE8DC;--ink:#1A1611;--w:#FFFFFF;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:68px;background:rgba(28,58,42,0.97);border-bottom:1px solid rgba(212,168,67,0.2);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:22px;color:var(--gold);text-decoration:none;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.6);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--g);background:var(--gold);padding:9px 20px;text-decoration:none;}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.burger span{display:block;width:22px;height:1.5px;background:rgba(245,240,232,0.8);margin:5px 0;}
+
+.page-hero{background:var(--g);padding:120px 64px 72px;text-align:center;}
+.page-hero-eye{font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(212,168,67,0.45);margin-bottom:16px;}
+.page-hero-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:clamp(56px,7vw,88px);color:var(--gold);line-height:1;letter-spacing:-0.02em;}
+
+.pate-strip{background:var(--gold);display:flex;justify-content:center;flex-wrap:wrap;}
+.pate-item{padding:20px 40px;text-align:center;border-right:0.5px solid rgba(28,58,42,0.12);flex:1;min-width:120px;}
+.pate-item:last-child{border-right:none;}
+.pate-val{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;font-weight:700;color:var(--g);display:block;line-height:1;margin-bottom:3px;}
+.pate-label{font-size:8px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(28,58,42,0.55);}
+
+.menu-wrap{max-width:960px;margin:0 auto;padding:80px 48px;}
+
+.menu-intro{margin-bottom:64px;border-bottom:0.5px solid rgba(28,58,42,0.1);padding-bottom:48px;}
+.menu-intro-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:40px;color:var(--g);margin-bottom:14px;}
+.menu-intro-text{font-size:14px;line-height:1.8;color:rgba(28,58,42,0.6);max-width:560px;}
+
+.pizza-row{display:grid;grid-template-columns:220px 1fr;gap:0;padding:40px 0;border-bottom:0.5px solid rgba(28,58,42,0.08);transition:background 0.2s;}
+.pizza-row:hover{background:rgba(28,58,42,0.02);}
+.pizza-row:last-child{border-bottom:none;}
+.pizza-row-left{padding-right:40px;border-right:0.5px solid rgba(212,168,67,0.2);}
+.pizza-row-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:32px;color:var(--g);line-height:1;margin-bottom:6px;}
+.pizza-row-badge{font-size:8px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);}
+.pizza-row-price{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--g);margin-top:12px;}
+.limited-row .pizza-row-price{color:var(--gold);}
+.pizza-row-right{padding-left:40px;display:flex;flex-direction:column;justify-content:center;}
+.pizza-row-ing{font-size:13.5px;line-height:1.8;color:rgba(28,58,42,0.58);margin-bottom:10px;}
+.pizza-row-ing strong{color:var(--ink);font-weight:400;}
+.pizza-tag{display:inline-block;font-size:8px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border:0.5px solid rgba(28,58,42,0.18);color:rgba(28,58,42,0.45);padding:3px 8px;}
+.vege-tag{border-color:rgba(59,109,17,0.3);color:#3B6D11;background:rgba(59,109,17,0.05);}
+.poisson-tag{border-color:rgba(59,109,17,0.3);color:#11476d;background:rgba(59,109,17,0.05);}
+.viande-tag{border-color:rgba(59,109,17,0.3);color:#6d1111;background:rgba(59,109,17,0.05);}
+.limited-row{background:var(--g);border-radius:4px;padding:40px;}
+.limited-row .pizza-row-left{border-right-color:rgba(212,168,67,0.2);}
+.limited-row .pizza-row-name{color:var(--gold);}
+.limited-row .pizza-row-badge{color:rgba(212,168,67,0.45);}
+.limited-row .pizza-row-ing{color:rgba(245,240,232,0.5);}
+.limited-row .pizza-row-ing strong{color:rgba(245,240,232,0.85);}
+.limited-label{display:inline-block;font-size:8px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;background:var(--gold);color:var(--g);padding:3px 8px;margin-bottom:10px;}
+
+.menu-note{margin-top:48px;padding:24px 28px;background:var(--creamf);border-left:2px solid rgba(212,168,67,0.4);}
+.menu-note p{font-size:12px;color:rgba(28,58,42,0.55);line-height:2;}
+
+footer{background:var(--g);padding:64px;border-top:0.5px solid rgba(212,168,67,0.15);}
+.footer-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:64px;margin-bottom:40px;}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:32px;color:var(--gold);margin-bottom:8px;}
+.footer-tagline{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(212,168,67,0.35);line-height:2;}
+.footer-col-title{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(212,168,67,0.4);margin-bottom:16px;}
+.footer-col a,.footer-col p{font-size:13px;color:rgba(245,240,232,0.45);line-height:2.2;text-decoration:none;display:block;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{max-width:960px;margin:0 auto;padding-top:24px;border-top:0.5px solid rgba(212,168,67,0.1);display:flex;justify-content:space-between;}
+.footer-copy{font-size:10px;color:rgba(212,168,67,0.25);letter-spacing:0.1em;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links,.nav-cta{display:none;}
+  .burger{display:block;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(28,58,42,0.98);padding:24px;gap:20px;}
+  .page-hero{padding:100px 20px 48px;}
+  .pate-item{padding:14px 16px;}
+  .menu-wrap{padding:48px 20px;}
+  .pizza-row{grid-template-columns:1fr;}
+  .pizza-row-left{border-right:none;padding-right:0;border-bottom:0.5px solid rgba(212,168,67,0.15);padding-bottom:12px;margin-bottom:16px;}
+  .pizza-row-right{padding-left:0;}
+  footer{padding:48px 20px;}
+  .footer-grid{grid-template-columns:1fr;gap:32px;}
+  .footer-bottom{flex-direction:column;gap:8px;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Mona Pizza</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="menu.html" class="active">La carte</a></li>
+    <li><a href="concept.html">Le concept</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Nous trouver</a>
+  <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-eye">6 recettes · Ingrédients frais · De saison</div>
+  <h1 class="page-hero-title">La carte</h1>
+</div>
+
+<div class="pate-strip">
+  <div class="pate-item"><span class="pate-val">Pate napolitaine</span><span class="pate-label">Pâton artisanal</span></div>
+  <div class="pate-item"><span class="pate-val">48h</span><span class="pate-label">Fermentation lente</span></div>
+  <div class="pate-item"><span class="pate-val">Ingredients frais</span><span class="pate-label">Farine italienne</span></div>
+  <div class="pate-item"><span class="pate-val">Levain</span><span class="pate-label">100% naturel</span></div>
+</div>
+
+<div class="menu-wrap">
+  <div class="menu-intro">
+    <h2 class="menu-intro-title">Nos pizzas</h2>
+    <p class="menu-intro-text">Chaque recette est travaillée pour trouver l'équilibre entre tradition napolitaine et créativité. Les ingrédients changent au fil des saisons, les recettes signature restent.</p>
+  </div>
+
+    <div class="pizza-row">
+    <div class="pizza-row-left">
+      <div class="pizza-row-name">La Margherita</div>
+      <div class="pizza-row-badge">Classique</div>
+      <div class="pizza-row-price">9.50 €</div>
+    </div>
+    <div class="pizza-row-right">
+      <div class="pizza-row-ing"><strong>Sauce tomate</strong> · <strong>mozzarella</strong> · <strong>basilic</strong> </div>
+      <span class="pizza-tag vege-tag">Sans viande</span>
+    </div>
+  </div>
+
+  <div class="pizza-row">
+    <div class="pizza-row-left">
+      <div class="pizza-row-name">La Verde</div>
+      <div class="pizza-row-badge">Végétarienne</div>
+      <div class="pizza-row-price">13.00 €</div>
+    </div>
+    <div class="pizza-row-right">
+      <div class="pizza-row-ing"><strong>Crème végétale</strong> · <strong>courgettes en lamelle</strong> · <strong>sauce verde</strong> · poivron vert · menthe · basilic · ail · zeste de citron · <strong>mozzarella</strong></div>
+      <span class="pizza-tag vege-tag">Sans viande</span>
+    </div>
+  </div>
+
+  <div class="pizza-row">
+    <div class="pizza-row-left">
+      <div class="pizza-row-name">La 3,5 fromages</div>
+      <div class="pizza-row-badge">Fromagère et fruité</div>
+      <div class="pizza-row-price">13.50 €</div>
+    </div>
+    <div class="pizza-row-right">
+      <div class="pizza-row-ing"><strong>Mozzarella · gorgonzola · chèvre · stracciatella · pomme enrobée au miel · poire · éclat de poivre</strong></div>
+      <span class="pizza-tag vege-tag">Sans viande</span>
+    </div>
+  </div>
+
+  <div class="pizza-row">
+    <div class="pizza-row-left">
+      <div class="pizza-row-name">La Printanière</div>
+      <div class="pizza-row-badge">Mer &amp; jardin</div>
+      <div class="pizza-row-price">13.50 €</div>
+    </div>
+    <div class="pizza-row-right">
+      <div class="pizza-row-ing">Base <strong>sauce tomate jaune</strong> · <strong>crevettes · courgettes · stracciatella · éclat de poivre · roquette</strong></div>
+      <span class="pizza-tag poisson-tag">mer</span>
+    </div>
+  </div>
+
+  <div class="pizza-row">
+    <div class="pizza-row-left">
+      <div class="pizza-row-name">La Carpacc'</div>
+      <div class="pizza-row-badge">Charcuterie italienne</div>
+      <div class="pizza-row-price">14.50 €</div>
+    </div>
+    <div class="pizza-row-right">
+      <div class="pizza-row-ing"><strong>Tomates cerise confites</strong> à l'ail &amp; au thym · <strong>bresaola</strong> · roquette</div>
+      <span class="pizza-tag viande-tag">Viandare</span>
+    </div>
+  </div>
+
+  <div class="pizza-row">
+    <div class="pizza-row-left">
+      <div class="pizza-row-name">La Burrata</div>
+      <div class="pizza-row-badge"> Gourmande et rafraichissante</div>
+      <div class="pizza-row-price">14.50 €</div>
+    </div>
+    <div class="pizza-row-right">
+      <div class="pizza-row-ing"><strong>Tomates cerise confites</strong> à l'ail &amp; au thym · <strong>burrata</strong> · éclat de poivre · balsamique · <strong>roquette</strong></div>
+      <span class="pizza-tag vege-tag">Sans viande</span>
+    </div>
+  </div>
+
+  <div class="pizza-row limited-row">
+    <div class="pizza-row-left">
+      <div class="limited-label">Édition limitée</div>
+      <div class="pizza-row-name">Tataki</div>
+      <div class="pizza-row-badge">Quand Kyoto rencontre Naples</div>
+      <div class="pizza-row-price">14.50 €</div>
+    </div>
+    <div class="pizza-row-right">
+      <div class="pizza-row-ing">Crème végétale infusée à la <strong>sauce soja</strong> · tranches de <strong>thon mariné</strong> · algues séchées · sésame · <strong>confiture de yuzu</strong></div>
+    </div>
+  </div>
+
+  <div class="menu-note">
+    <p>Toutes nos pizzas sont préparées à la commande · Allergènes disponibles sur demande</p>
+    <p>Ingrédients frais, de saison</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">Mona Pizza</div><div class="footer-tagline">Pizza napolitaine artisanale<br>Au levain naturel · Paris &amp; Pantin</div></div>
+    <div class="footer-col"><div class="footer-col-title">Navigation</div><a href="index.html">Accueil</a><a href="menu.html">La carte</a><a href="concept.html">Le concept</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><div class="footer-col-title">Nous trouver</div><p>Jeu · Ven · Sam · Dim — Soir</p><p style="margin-top:10px;">mona.pizza.truck@gmail.com</p><p>06 27 84 54 50</p><p><a href="https://instagram.com/monapizza__" target="_blank">@monapizza</a></p></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 Mona Pizza</div><div class="footer-copy">Paris · Pantin · Petite Couronne</div></div>
+</footer>
+</body>
+</html>

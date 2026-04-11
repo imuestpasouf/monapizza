@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mona Pizza — Pizza napolitaine artisanale au levain naturel. Food truck Paris & Pantin.">
+<title>Mona Pizza — Pizza napolitaine artisanale</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g: #357652;
+  --g2: #264D38;
+  --gold: #D4A843;
+  --goldf: #E8C06A;
+  --cream: #F5F0E8;
+  --creamf: #EDE8DC;
+  --ink: #1A1611;
+  --w: #FFFFFF;
+}
+
+*,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden; }
+
+/* ── NAV ── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:68px;
+  transition:background 0.4s, border-color 0.4s;
+}
+nav.scrolled {
+  background:rgba(28,58,42,0.97);
+  border-bottom:1px solid rgba(212,168,67,0.2);
+  backdrop-filter:blur(12px);
+}
+.nav-logo {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:700;font-size:22px;color:var(--gold);
+  text-decoration:none;letter-spacing:-0.01em;
+  opacity:0;transition:opacity 0.4s;
+}
+nav.scrolled .nav-logo { opacity:1; }
+.nav-links { display:flex;gap:36px;list-style:none; }
+.nav-links a {
+  font-size:10px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(245,240,232,0.6);
+  text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover { color:var(--gold); }
+.nav-cta {
+  font-size:10px;font-weight:500;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--g);
+  background:var(--gold);padding:9px 20px;
+  text-decoration:none;transition:background 0.2s;
+}
+.nav-cta:hover { background:var(--goldf); }
+.burger { display:none;background:none;border:none;cursor:pointer;padding:4px; }
+.burger span { display:block;width:22px;height:1.5px;background:rgba(245,240,232,0.8);margin:5px 0;transition:all 0.3s; }
+
+/* ── HERO ── */
+.hero {
+  min-height:100vh;
+  background:var(--g);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-left {
+  display:flex;flex-direction:column;
+  justify-content:center;
+  padding:120px 64px 80px;
+  position:relative;z-index:2;
+}
+
+.hero-overline {
+  font-size:9px;font-weight:500;letter-spacing:0.3em;
+  text-transform:uppercase;color:rgba(212,168,67,0.5);
+  margin-bottom:28px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-overline::before {
+  content:'';width:32px;height:0.5px;background:rgba(212,168,67,0.4);
+}
+
+.hero-title {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:700;font-size:clamp(72px,8vw,108px);
+  color:var(--cream);line-height:0.88;
+  letter-spacing:-0.03em;margin-bottom:10px;
+}
+.hero-title em {
+  font-style:italic;color:var(--gold);display:block;
+}
+
+.hero-tagline {
+  font-size:9px;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(212,168,67,0.45);margin-bottom:40px;margin-top:16px;
+}
+
+.hero-desc {
+  font-size:15px;line-height:1.8;
+  color:rgba(245,240,232,0.6);
+  max-width:360px;margin-bottom:48px;
+}
+.hero-desc em { color:var(--goldf);font-style:normal; }
+
+.hero-btns { display:flex;gap:12px;flex-wrap:wrap; }
+
+.btn-gold {
+  font-size:10px;font-weight:500;letter-spacing:0.18em;
+  text-transform:uppercase;background:var(--gold);color:var(--g);
+  padding:14px 32px;text-decoration:none;transition:background 0.2s;
+  display:inline-block;
+}
+.btn-gold:hover { background:var(--goldf); }
+
+.btn-ghost {
+  font-size:10px;font-weight:500;letter-spacing:0.18em;
+  text-transform:uppercase;border:0.5px solid rgba(212,168,67,0.4);
+  color:rgba(212,168,67,0.8);padding:14px 32px;
+  text-decoration:none;transition:all 0.2s;display:inline-block;
+}
+.btn-ghost:hover { border-color:var(--gold);color:var(--gold); }
+
+.hero-right {
+  position:relative;display:flex;
+  align-items:center;justify-content:center;
+  padding:80px 64px 80px 0;
+}
+
+.hero-logo-frame {
+  position:relative;width:100%;max-width:460px;
+}
+
+.hero-logo-img {
+  width:100%;border-radius:4px;
+  position:relative;z-index:2;
+}
+
+.hero-badge-strip {
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(212,168,67,0.08);
+  border-top:0.5px solid rgba(212,168,67,0.15);
+  padding:24px 56px;
+  display:flex;justify-content:center;gap:48px;
+  flex-wrap:wrap;
+}
+
+.hero-badge {
+  text-align:center;
+}
+.hero-badge-val {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:32px;font-weight:300;color:var(--gold);
+  display:block;line-height:1;
+}
+.hero-badge-label {
+  font-size:8px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(212,168,67,0.4);
+  margin-top:4px;display:block;
+}
+
+/* ── MANIFESTO ── */
+.manifesto {
+  background:var(--cream);
+  padding:120px 64px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;max-width:1200px;margin:0 auto;
+}
+
+.manifesto-left {}
+
+.manifesto-eyebrow {
+  font-size:9px;font-weight:500;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+}
+
+.manifesto-title {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:700;font-size:clamp(40px,4vw,56px);
+  color:var(--g);line-height:1.05;letter-spacing:-0.02em;
+  margin-bottom:28px;
+}
+
+.manifesto-text {
+  font-size:15px;line-height:1.85;color:rgba(28,58,42,0.65);
+  margin-bottom:16px;
+}
+.manifesto-text em { color:var(--g);font-style:normal;font-weight:500; }
+
+.manifesto-right {
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(28,58,42,0.08);
+}
+
+.pillar {
+  background:var(--w);padding:32px 28px;
+  border-bottom:2px solid transparent;
+  transition:border-color 0.3s,background 0.3s;
+}
+.pillar:hover { border-bottom-color:var(--gold);background:#FDFAF5; }
+
+.pillar-n {
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-weight:300;
+  color:rgba(28,58,42,0.08);line-height:1;margin-bottom:12px;
+}
+.pillar-title {
+  font-size:13px;font-weight:500;color:var(--g);margin-bottom:8px;
+}
+.pillar-text { font-size:12px;line-height:1.7;color:rgba(28,58,42,0.55); }
+
+/* ── PIZZAS ── */
+.pizzas-section {
+  background:var(--g);padding:120px 0;
+}
+
+.pizzas-header {
+  text-align:center;padding:0 64px;margin-bottom:64px;
+}
+.pizzas-eyebrow {
+  font-size:9px;font-weight:500;letter-spacing:0.25em;
+  text-transform:uppercase;color:rgba(212,168,67,0.5);margin-bottom:16px;
+}
+.pizzas-title {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:700;font-size:clamp(48px,5vw,72px);
+  color:var(--gold);line-height:1;letter-spacing:-0.02em;
+}
+
+.pizzas-scroll {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(212,168,67,0.1);
+  margin:0 0;
+}
+
+.pizza-item {
+  background:var(--g2);padding:40px 36px;
+  transition:background 0.25s;cursor:default;
+}
+.pizza-item:hover { background:#2E5C42; }
+
+.pizza-item.hero-pizza {
+  background:rgba(212,168,67,0.08);
+  border:0.5px solid rgba(212,168,67,0.2);
+}
+
+.pizza-n {
+  font-size:9px;letter-spacing:0.15em;
+  color:rgba(212,168,67,0.35);margin-bottom:14px;
+  font-weight:500;
+}
+.pizza-title {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:700;font-size:28px;color:var(--gold);
+  margin-bottom:6px;line-height:1;
+}
+.pizza-badge-small {
+  font-size:8px;font-weight:500;letter-spacing:0.12em;
+  text-transform:uppercase;color:rgba(212,168,67,0.4);
+  margin-bottom:14px;display:block;
+}
+.pizza-desc {
+  font-size:12px;line-height:1.75;color:rgba(245,240,232,0.45);
+}
+.pizza-desc strong { color:rgba(245,240,232,0.75);font-weight:400; }
+
+.limited-flag {
+  display:inline-block;font-size:8px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--gold);color:var(--g);
+  padding:3px 8px;margin-bottom:12px;
+}
+
+.pizzas-cta {
+  text-align:center;margin-top:48px;padding:0 64px;
+}
+
+/* ── HORAIRES STRIP ── */
+.horaires {
+  background:var(--gold);
+  display:flex;justify-content:center;
+  align-items:center;gap:0;flex-wrap:wrap;
+}
+.horaire-block {
+  padding:28px 48px;text-align:center;
+  border-right:0.5px solid rgba(28,58,42,0.15);
+  flex:1;min-width:140px;
+}
+.horaire-block:last-child { border-right:none; }
+.horaire-label {
+  font-size:8px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(28,58,42,0.55);
+  margin-bottom:6px;
+}
+.horaire-val {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:22px;font-weight:700;color:var(--g);
+}
+
+/* ── CONCEPT BAND ── */
+.concept-band {
+  background:var(--creamf);
+  padding:100px 64px;
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:80px;align-items:center;
+  max-width:1200px;margin:0 auto;
+}
+.concept-band-label {
+  font-size:9px;font-weight:500;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:16px;
+}
+.concept-band-title {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:700;font-size:clamp(36px,3.5vw,48px);
+  color:var(--g);line-height:1.05;
+}
+.concept-facts {
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;
+}
+.concept-fact {
+  padding-top:20px;
+  border-top:1px solid rgba(212,168,67,0.3);
+}
+.concept-fact-val {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:36px;font-weight:300;color:var(--g);
+  margin-bottom:6px;
+}
+.concept-fact-label {
+  font-size:11px;color:rgba(28,58,42,0.55);line-height:1.5;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--g);
+  padding:64px;
+  border-top:0.5px solid rgba(212,168,67,0.15);
+}
+.footer-grid {
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:64px;margin-bottom:48px;
+}
+.footer-brand {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:700;font-size:36px;color:var(--gold);margin-bottom:10px;
+}
+.footer-tagline {
+  font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(212,168,67,0.35);line-height:2;
+}
+.footer-col-title {
+  font-size:9px;font-weight:500;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(212,168,67,0.4);
+  margin-bottom:20px;
+}
+.footer-col a, .footer-col p {
+  font-size:13px;color:rgba(245,240,232,0.45);
+  line-height:2.2;text-decoration:none;display:block;
+  transition:color 0.2s;
+}
+.footer-col a:hover { color:var(--gold); }
+.footer-bottom {
+  max-width:1200px;margin:0 auto;
+  padding-top:28px;border-top:0.5px solid rgba(212,168,67,0.1);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-copy {
+  font-size:10px;color:rgba(212,168,67,0.25);letter-spacing:0.1em;
+}
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity:0;transform:translateY(32px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity:1;transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+.reveal-delay-4 { transition-delay:0.4s; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav { padding:0 20px; }
+  .nav-links,.nav-cta { display:none; }
+  .burger { display:block; }
+  .nav-links.open {
+    display:flex;flex-direction:column;
+    position:fixed;top:68px;left:0;right:0;
+    background:rgba(28,58,42,0.98);
+    padding:24px;gap:20px;
+    border-bottom:0.5px solid rgba(212,168,67,0.2);
+  }
+  .hero { grid-template-columns:1fr;min-height:auto; }
+  .hero-left { padding:100px 24px 48px; }
+  .hero-right { padding:0 24px 64px; }
+  .hero-badge-strip { gap:24px;padding:20px 24px; }
+  .manifesto { grid-template-columns:1fr;padding:64px 24px;gap:48px; }
+  .manifesto-right { grid-template-columns:1fr; }
+  .pizzas-scroll { grid-template-columns:1fr; }
+  .pizzas-header,.pizzas-cta { padding:0 24px; }
+  .horaire-block { padding:20px 24px; }
+  .concept-band { grid-template-columns:1fr;padding:64px 24px;gap:40px; }
+  .concept-facts { grid-template-columns:1fr 1fr; }
+  footer { padding:48px 24px; }
+  .footer-grid { grid-template-columns:1fr;gap:40px; }
+  .footer-bottom { flex-direction:column;gap:12px;text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Mona Pizza</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="menu.html">La carte</a></li>
+    <li><a href="concept.html">Le concept</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Nous trouver</a>
+  <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-overline reveal">Food truck · Paris &amp; Petite Couronne</div>
+    <h1 class="hero-title reveal reveal-delay-1">
+      Mona<br><em>Pizza</em>
+    </h1>
+    <div class="hero-tagline reveal reveal-delay-2">Pizza napolitaine · Au levain naturel · Pantin</div>
+    <p class="hero-desc reveal reveal-delay-2">
+      Préparée à la commande, façonnée à la main.<br>
+      <em>Farine Caputo, levain naturel, 48h de fermentation.</em><br>
+      Chaque pizza est unique.
+    </p>
+    <div class="hero-btns reveal reveal-delay-3">
+      <a href="menu.html" class="btn-gold">Voir la carte</a>
+      <a href="contact.html" class="btn-ghost">Nous trouver</a>
+    </div>
+  </div>
+  <div class="hero-right reveal reveal-delay-2">
+    <div class="hero-logo-frame">
+      <img class="hero-logo-img" src="images/IMG_9602.jpg">
+    </div>
+  </div>
+  <div class="hero-badge-strip">
+    <div class="hero-badge"><span class="hero-badge-val">Pate napolitaine</span><span class="hero-badge-label">Pâton artisanal</span></div>
+    <div class="hero-badge"><span class="hero-badge-val">48h</span><span class="hero-badge-label">Fermentation lente</span></div>
+    <div class="hero-badge"><span class="hero-badge-val">7</span><span class="hero-badge-label">Recettes signature</span></div>
+    <div class="hero-badge"><span class="hero-badge-val">100%</span><span class="hero-badge-label">Levain naturel</span></div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section style="background:var(--cream);">
+  <div class="manifesto">
+    <div class="manifesto-left">
+      <div class="manifesto-eyebrow reveal">Notre philosophie</div>
+      <h2 class="manifesto-title reveal reveal-delay-1">L'artisanat<br>en mouvement</h2>
+      <p class="manifesto-text reveal reveal-delay-2">
+        La pizza napolitaine est une des grandes cuisines populaires du monde.
+        Mona Pizza en est une interprétation parisienne — <em>mobile, créative, ancrée dans l'artisanat.</em>
+      </p>
+      <p class="manifesto-text reveal reveal-delay-3">
+        Chaque service, on prépare devant vous. Chaque pâton a fermenté 48 heures.
+        Chaque ingrédient est choisi. <em>On ne précipite rien.</em>
+      </p>
+      <div style="margin-top:32px;" class="reveal reveal-delay-3">
+        <a href="concept.html" class="btn-gold">Découvrir le concept</a>
+      </div>
+    </div>
+    <div class="manifesto-right reveal reveal-delay-1">
+      <div class="pillar">
+        <div class="pillar-n">01</div>
+        <div class="pillar-title">Le levain naturel</div>
+        <div class="pillar-text">Vivant, nourri chaque jour. Il donne à la pâte légèreté, alvéoles et cette acidité douce qui la distingue.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">02</div>
+        <div class="pillar-title">La farine Caputo</div>
+        <div class="pillar-text">Molino Caputo, Naples, depuis 1924. La référence mondiale pour la pizza napolitaine. Inchangeable.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">03</div>
+        <div class="pillar-title">48h de fermentation</div>
+        <div class="pillar-text">On prépare aujourd'hui ce que vous mangerez après-demain. Le temps est un ingrédient.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">04</div>
+        <div class="pillar-title">Façonné à la main</div>
+        <div class="pillar-text">Jamais au rouleau. La pâte garde ses bulles d'air, sa texture vivante, son irrégularité naturelle.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIZZAS -->
+<section class="pizzas-section">
+  <div class="pizzas-header">
+    <div class="pizzas-eyebrow reveal">6 recettes · Ingrédients frais · De saison</div>
+    <h2 class="pizzas-title reveal reveal-delay-1">La carte</h2>
+  </div>
+  <div class="pizzas-scroll">
+    <div class="pizza-item reveal">
+      <div class="pizza-n">01</div>
+      <div class="pizza-title">Verde</div>
+      <span class="pizza-badge-small">Végétarienne</span>
+      <div class="pizza-desc"><strong>Crème végétale</strong> · courgettes mandoline · sauce poivron vert · menthe · <strong>basilic</strong> · ail · zeste citron · mozzarella</div>
+    </div>
+    <div class="pizza-item reveal reveal-delay-1">
+      <div class="pizza-n">02</div>
+      <div class="pizza-title">3,5 fromages</div>
+      <span class="pizza-badge-small">Signature fromagère</span>
+      <div class="pizza-desc"><strong>Mozzarella · gorgonzola · chèvre · stracciatella</strong> · pomme au miel · éclat de poivre</div>
+    </div>
+    <div class="pizza-item reveal reveal-delay-2">
+      <div class="pizza-n">03</div>
+      <div class="pizza-title">Printanière</div>
+      <span class="pizza-badge-small">Mer &amp; jardin</span>
+      <div class="pizza-desc">Sauce tomate jaune · <strong>crevettes · courgettes</strong> · stracciatella · éclat de poivre · <strong>roquette</strong></div>
+    </div>
+    <div class="pizza-item reveal reveal-delay-1">
+      <div class="pizza-n">04</div>
+      <div class="pizza-title">Carpaccio</div>
+      <span class="pizza-badge-small">Charcuterie italienne</span>
+      <div class="pizza-desc"><strong>Tomates confites</strong> ail &amp; thym · <strong>bresaola</strong> · roquette</div>
+    </div>
+    <div class="pizza-item reveal reveal-delay-2">
+      <div class="pizza-n">05</div>
+      <div class="pizza-title">Burrata</div>
+      <span class="pizza-badge-small">Mer &amp; fromage</span>
+      <div class="pizza-desc">Sauce tomate jaune · <strong>crevettes · courgettes</strong> · <strong>burrata</strong> · éclat de poivre · roquette</div>
+    </div>
+    <div class="pizza-item hero-pizza reveal reveal-delay-3">
+      <div class="limited-flag">Édition limitée</div>
+      <div class="pizza-n">—</div>
+      <div class="pizza-title">Tataki</div>
+      <span class="pizza-badge-small">Japon rencontre Naples</span>
+      <div class="pizza-desc">Crème végétale soja · <strong>thon mariné</strong> · algues séchées · sésame · <strong>confiture de yuzu</strong></div>
+    </div>
+  </div>
+  <div class="pizzas-cta reveal">
+    <a href="menu.html" class="btn-gold" style="margin-top:48px;display:inline-block;">Voir la carte complète</a>
+  </div>
+</section>
+
+<!-- HORAIRES -->
+<div class="horaires">
+  <div class="horaire-block"><div class="horaire-label">Jours</div><div class="horaire-val">Jeu · Ven · Sam · Dim</div></div>
+  <div class="horaire-block"><div class="horaire-label">Service</div><div class="horaire-val">Le soir</div></div>
+  <div class="horaire-block"><div class="horaire-label">Ouverture</div><div class="horaire-val">Juin 2026</div></div>
+  <div class="horaire-block"><div class="horaire-label">Zone</div><div class="horaire-val">Paris &amp; Pantin</div></div>
+</div>
+
+<!-- CONCEPT BAND -->
+<section style="background:var(--creamf);">
+  <div class="concept-band">
+    <div>
+      <div class="concept-band-label reveal">En chiffres</div>
+      <h2 class="concept-band-title reveal reveal-delay-1">Un projet<br>rigoureux</h2>
+    </div>
+    <div class="concept-facts">
+      <div class="concept-fact reveal">
+        <div class="concept-fact-val">280g</div>
+        <div class="concept-fact-label">Pâton artisanal façonné à la main à chaque commande</div>
+      </div>
+      <div class="concept-fact reveal reveal-delay-1">
+        <div class="concept-fact-val">48h</div>
+        <div class="concept-fact-label">Fermentation lente au levain naturel minimum</div>
+      </div>
+      <div class="concept-fact reveal reveal-delay-2">
+        <div class="concept-fact-val">Caputo</div>
+        <div class="concept-fact-label">Farine napolitaine type 00 — référence mondiale</div>
+      </div>
+      <div class="concept-fact reveal reveal-delay-3">
+        <div class="concept-fact-val">6</div>
+        <div class="concept-fact-label">Recettes signature dont une édition limitée</div>
+      </div>
+      <div class="concept-fact reveal reveal-delay-1">
+        <div class="concept-fact-val">3</div>
+        <div class="concept-fact-label">Associés parisiens portant le projet depuis 2025</div>
+      </div>
+      <div class="concept-fact reveal reveal-delay-2">
+        <div class="concept-fact-val">2026</div>
+        <div class="concept-fact-label">Ouverture prévue semaine du 22 juin à Paris</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Mona Pizza</div>
+      <div class="footer-tagline">Pizza napolitaine artisanale<br>Au levain naturel<br>Paris &amp; Pantin · Petite Couronne</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigation</div>
+      <a href="index.html">Accueil</a>
+      <a href="menu.html">La carte</a>
+      <a href="concept.html">Le concept</a>
+      <a href="contact.html">Contact &amp; localisation</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Nous trouver</div>
+      <p>Jeu · Ven · Sam · Dim — Soir</p>
+      <p>104 Av. Jean Lolive, 93500 Pantin</p>
+      <p style="margin-top:12px;">mona.pizza.truck@gmail.com</p>
+      <p>06 27 84 54 50</p>
+      <a href="https://instagram.com/monapizza__" target="_blank">@monapizza</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Mona Pizza — Tous droits réservés</div>
+    <div class="footer-copy">Pizza napolitaine artisanale · Pantin · Paris</div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+nav.classList.add('scrolled');
+
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, {threshold: 0.12});
+reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
