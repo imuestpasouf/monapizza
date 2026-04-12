@@ -385,7 +385,11 @@ footer {
 .reveal-delay-4 { transition-delay:0.4s; }
 
 /* ── RESPONSIVE ── */
+.pizza-photo-mobile { display:none; }
 @media(max-width:900px){
+  .pizza-photo-desktop { display:none; }
+  .pizza-photo-mobile { display:flex;flex-direction:column;gap:16px;padding:24px 20px; }
+  .pizza-photo-mobile img { width:100%;border-radius:4px;display:block; }
   nav { padding:0 20px; }
   .nav-links,.nav-cta { display:none; }
   .burger { display:block; }
@@ -399,7 +403,7 @@ footer {
   .hero { grid-template-columns:1fr;min-height:auto;background-image:url('images/main_destock.jpg'); }
   .hero-left { padding:100px 24px 48px; }
   .hero-right { padding:0 24px 64px; }
-  .hero-badge-strip { gap:24px;padding:20px 24px; }
+  .hero-badge-strip { gap:24px;padding:20px 24px;position:relative;bottom:auto; }
   .manifesto { grid-template-columns:1fr;padding:64px 24px;gap:48px; }
   .manifesto-right { grid-template-columns:1fr; }
   .pizzas-scroll { grid-template-columns:1fr; }
@@ -461,8 +465,13 @@ footer {
 </section>
 
 <!-- PHOTO PIZZA -->
-<div style="width:100%;line-height:0;">
+<div class="pizza-photo-desktop" style="width:100%;line-height:0;">
   <img src="images/pizza-photo.png" alt="Pizza Mona" style="width:100%;display:block;object-fit:cover;">
+</div>
+<div class="pizza-photo-mobile">
+  <img src="images/pizza-photo1.png" alt="Pizza Mona 1">
+  <img src="images/pizza-photo2.png" alt="Pizza Mona 2">
+  <img src="images/pizza-photo3.png" alt="Pizza Mona 3">
 </div>
 
 <!-- MANIFESTO -->
